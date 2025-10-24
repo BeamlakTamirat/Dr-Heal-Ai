@@ -1,0 +1,384 @@
+{
+    "common_cold": {
+      "name": "Common Cold",
+      "description": "A viral infection of the upper respiratory tract, primarily affecting the nose and throat. Usually harmless and resolves within 7-10 days.",
+      "common_symptoms": ["runny_nose", "sore_throat", "cough", "sneezing", "mild_fever", "fatigue", "headache"],
+      "causes": ["rhinovirus", "coronavirus", "respiratory_syncytial_virus"],
+      "risk_factors": [
+        "Close contact with infected individuals",
+        "Weakened immune system",
+        "Age (children under 6 are most susceptible)",
+        "Seasonal factors (more common in fall and winter)",
+        "Crowded environments"
+      ],
+      "diagnosis_methods": [
+        "Clinical examination based on symptoms",
+        "Usually no tests needed",
+        "Throat swab if bacterial infection suspected"
+      ],
+      "treatment_options": [
+        "Rest and adequate sleep",
+        "Drink plenty of fluids",
+        "Over-the-counter pain relievers (acetaminophen, ibuprofen)",
+        "Throat lozenges for sore throat",
+        "Saline nasal drops or spray",
+        "Humidifier to ease congestion"
+      ],
+      "prevention": [
+        "Frequent handwashing",
+        "Avoid touching face",
+        "Stay away from sick individuals",
+        "Don't share utensils or drinks",
+        "Maintain healthy lifestyle"
+      ],
+      "when_to_see_doctor": "If symptoms last more than 10 days, high fever develops, severe headache, chest pain, or difficulty breathing occurs",
+      "complications": ["sinusitis", "ear_infection", "bronchitis", "pneumonia"]
+    },
+    "flu": {
+      "name": "Influenza (Flu)",
+      "description": "A contagious respiratory illness caused by influenza viruses. More severe than common cold, can lead to serious complications.",
+      "common_symptoms": ["high_fever", "chills", "muscle_aches", "cough", "sore_throat", "fatigue", "headache", "runny_nose"],
+      "causes": ["influenza_a_virus", "influenza_b_virus"],
+      "risk_factors": [
+        "Age (young children and elderly)",
+        "Weakened immune system",
+        "Chronic medical conditions",
+        "Pregnancy",
+        "Obesity",
+        "Living in nursing homes"
+      ],
+      "diagnosis_methods": [
+        "Clinical symptoms evaluation",
+        "Rapid influenza diagnostic test (RIDT)",
+        "RT-PCR test for confirmation",
+        "Viral culture (rarely needed)"
+      ],
+      "treatment_options": [
+        "Antiviral medications (oseltamivir, zanamivir) if started within 48 hours",
+        "Rest and plenty of fluids",
+        "Fever reducers (acetaminophen, ibuprofen)",
+        "Cough suppressants",
+        "Isolation to prevent spread"
+      ],
+      "prevention": [
+        "Annual flu vaccination",
+        "Frequent handwashing",
+        "Avoid close contact with sick people",
+        "Cover coughs and sneezes",
+        "Stay home when sick"
+      ],
+      "when_to_see_doctor": "Difficulty breathing, chest pain, persistent vomiting, confusion, severe weakness, or symptoms that improve then worsen",
+      "complications": ["pneumonia", "bronchitis", "sinus_infections", "ear_infections", "myocarditis", "encephalitis", "multi_organ_failure"]
+    },
+    "covid19": {
+      "name": "COVID-19",
+      "description": "Respiratory illness caused by SARS-CoV-2 virus. Can range from mild to severe, with potential for long-term effects.",
+      "common_symptoms": ["fever", "cough", "shortness_of_breath", "fatigue", "loss_of_taste_or_smell", "body_aches", "sore_throat", "headache"],
+      "causes": ["sars_cov_2_virus"],
+      "risk_factors": [
+        "Age over 65",
+        "Chronic lung disease",
+        "Heart conditions",
+        "Diabetes",
+        "Obesity",
+        "Weakened immune system",
+        "Unvaccinated status"
+      ],
+      "diagnosis_methods": [
+        "RT-PCR test (nasal or throat swab)",
+        "Rapid antigen test",
+        "Antibody test (for past infection)",
+        "Chest X-ray or CT scan for severe cases"
+      ],
+      "treatment_options": [
+        "Isolation for 5-10 days",
+        "Rest and hydration",
+        "Fever reducers and pain relievers",
+        "Antiviral medications (Paxlovid, remdesivir) for high-risk patients",
+        "Supplemental oxygen if needed",
+        "Hospitalization for severe cases"
+      ],
+      "prevention": [
+        "Vaccination and boosters",
+        "Wear masks in crowded indoor spaces",
+        "Maintain physical distance",
+        "Frequent handwashing",
+        "Improve ventilation",
+        "Stay home when sick"
+      ],
+      "when_to_see_doctor": "Difficulty breathing, persistent chest pain, confusion, inability to stay awake, bluish lips or face",
+      "complications": ["pneumonia", "acute_respiratory_distress_syndrome", "blood_clots", "heart_problems", "kidney_injury", "long_covid"]
+    },
+    "pneumonia": {
+      "name": "Pneumonia",
+      "description": "Infection that inflames air sacs in one or both lungs, which may fill with fluid. Can be caused by bacteria, viruses, or fungi.",
+      "common_symptoms": ["cough_with_phlegm", "fever", "chills", "shortness_of_breath", "chest_pain", "fatigue", "nausea", "confusion_in_elderly"],
+      "causes": ["streptococcus_pneumoniae", "haemophilus_influenzae", "viruses", "fungi", "aspiration"],
+      "risk_factors": [
+        "Age under 2 or over 65",
+        "Hospitalization",
+        "Chronic disease (COPD, asthma, heart disease)",
+        "Smoking",
+        "Weakened immune system",
+        "Recent viral respiratory infection"
+      ],
+      "diagnosis_methods": [
+        "Chest X-ray",
+        "Blood tests",
+        "Sputum culture",
+        "Pulse oximetry",
+        "CT scan if needed",
+        "Pleural fluid culture"
+      ],
+      "treatment_options": [
+        "Antibiotics for bacterial pneumonia",
+        "Antiviral medications for viral pneumonia",
+        "Fever reducers",
+        "Cough medicine",
+        "Oxygen therapy if needed",
+        "Hospitalization for severe cases",
+        "IV fluids and antibiotics"
+      ],
+      "prevention": [
+        "Pneumococcal vaccine",
+        "Flu vaccine",
+        "Good hygiene",
+        "Don't smoke",
+        "Maintain healthy immune system"
+      ],
+      "when_to_see_doctor": "Difficulty breathing, chest pain, persistent fever above 102°F, persistent cough with pus",
+      "complications": ["bacteremia", "lung_abscess", "pleural_effusion", "respiratory_failure", "sepsis"]
+    },
+    "migraine": {
+      "name": "Migraine",
+      "description": "Neurological condition causing intense, debilitating headaches often accompanied by nausea, vomiting, and sensitivity to light and sound.",
+      "common_symptoms": ["severe_headache", "nausea", "vomiting", "sensitivity_to_light", "sensitivity_to_sound", "visual_disturbances", "dizziness"],
+      "causes": ["genetic_factors", "brain_chemical_imbalances", "environmental_triggers", "hormonal_changes"],
+      "risk_factors": [
+        "Family history",
+        "Age (most common 10-40 years)",
+        "Female gender",
+        "Hormonal changes",
+        "Stress",
+        "Certain foods and drinks",
+        "Sleep changes"
+      ],
+      "diagnosis_methods": [
+        "Medical history and symptom description",
+        "Neurological examination",
+        "MRI or CT scan to rule out other causes",
+        "Blood tests"
+      ],
+      "treatment_options": [
+        "Pain relievers (NSAIDs, triptans)",
+        "Anti-nausea medications",
+        "Preventive medications (beta blockers, antidepressants)",
+        "CGRP inhibitors",
+        "Botox injections for chronic migraine",
+        "Rest in dark, quiet room",
+        "Cold compress"
+      ],
+      "prevention": [
+        "Identify and avoid triggers",
+        "Maintain regular sleep schedule",
+        "Stay hydrated",
+        "Regular exercise",
+        "Stress management",
+        "Limit caffeine and alcohol"
+      ],
+      "when_to_see_doctor": "Sudden severe headache, headache with fever/stiff neck/confusion, headache after head injury, chronic worsening headaches",
+      "complications": ["chronic_migraine", "medication_overuse_headache", "status_migrainosus", "migrainous_infarction"]
+    },
+    "asthma": {
+      "name": "Asthma",
+      "description": "Chronic condition where airways narrow and swell, producing extra mucus, making breathing difficult and triggering coughing and wheezing.",
+      "common_symptoms": ["shortness_of_breath", "wheezing", "cough", "chest_tightness", "difficulty_breathing"],
+      "causes": ["genetic_factors", "environmental_allergens", "respiratory_infections", "air_pollutants", "exercise"],
+      "risk_factors": [
+        "Family history of asthma",
+        "Allergic conditions",
+        "Obesity",
+        "Smoking or secondhand smoke exposure",
+        "Occupational exposures",
+        "Air pollution"
+      ],
+      "diagnosis_methods": [
+        "Spirometry (lung function test)",
+        "Peak flow measurement",
+        "Methacholine challenge test",
+        "Allergy testing",
+        "Chest X-ray",
+        "Exhaled nitric oxide test"
+      ],
+      "treatment_options": [
+        "Quick-relief inhalers (albuterol)",
+        "Long-term control medications (inhaled corticosteroids)",
+        "Combination inhalers",
+        "Leukotriene modifiers",
+        "Biologics for severe asthma",
+        "Allergy medications",
+        "Immunotherapy"
+      ],
+      "prevention": [
+        "Identify and avoid triggers",
+        "Get vaccinated (flu, pneumonia)",
+        "Monitor breathing",
+        "Follow asthma action plan",
+        "Avoid smoke and pollutants",
+        "Manage allergies"
+      ],
+      "when_to_see_doctor": "Severe shortness of breath, no improvement with rescue inhaler, shortness of breath with minimal activity",
+      "complications": ["permanent_airway_narrowing", "respiratory_failure", "pneumonia", "collapsed_lung", "death"]
+    },
+    "gastroenteritis": {
+      "name": "Gastroenteritis (Stomach Flu)",
+      "description": "Inflammation of the digestive tract, typically caused by viral or bacterial infection, leading to diarrhea and vomiting.",
+      "common_symptoms": ["diarrhea", "nausea", "vomiting", "abdominal_cramps", "fever", "headache", "muscle_aches"],
+      "causes": ["norovirus", "rotavirus", "bacteria_like_salmonella", "parasites", "contaminated_food_or_water"],
+      "risk_factors": [
+        "Young children and elderly",
+        "Weakened immune system",
+        "Eating contaminated food",
+        "Close contact with infected person",
+        "Poor hygiene"
+      ],
+      "diagnosis_methods": [
+        "Clinical evaluation based on symptoms",
+        "Stool sample test",
+        "Blood tests for dehydration",
+        "Rarely, imaging tests"
+      ],
+      "treatment_options": [
+        "Oral rehydration solutions",
+        "Rest",
+        "Gradual return to bland diet (BRAT diet)",
+        "Anti-diarrheal medications (use cautiously)",
+        "Antibiotics only if bacterial cause confirmed",
+        "IV fluids for severe dehydration"
+      ],
+      "prevention": [
+        "Frequent handwashing",
+        "Proper food handling and cooking",
+        "Avoid contaminated water",
+        "Rotavirus vaccine for infants",
+        "Isolate when sick"
+      ],
+      "when_to_see_doctor": "Signs of severe dehydration, bloody stools, high fever, vomiting for more than 2 days, severe abdominal pain",
+      "complications": ["dehydration", "electrolyte_imbalance", "kidney_failure", "sepsis"]
+    },
+    "appendicitis": {
+      "name": "Appendicitis",
+      "description": "Inflammation of the appendix, a small pouch attached to the large intestine. Medical emergency requiring prompt surgical treatment.",
+      "common_symptoms": ["abdominal_pain_lower_right", "nausea", "vomiting", "loss_of_appetite", "fever", "inability_to_pass_gas"],
+      "causes": ["blockage_of_appendix_opening", "infection", "inflammatory_bowel_disease"],
+      "risk_factors": [
+        "Age 10-30 years (most common)",
+        "Male gender",
+        "Family history",
+        "Certain infections"
+      ],
+      "diagnosis_methods": [
+        "Physical examination (McBurney's point tenderness)",
+        "Blood tests (elevated white blood cells)",
+        "Urine test to rule out UTI",
+        "CT scan or ultrasound",
+        "Abdominal X-ray"
+      ],
+      "treatment_options": [
+        "Emergency appendectomy (surgical removal)",
+        "Antibiotics before and after surgery",
+        "Laparoscopic surgery (minimally invasive)",
+        "Open surgery if ruptured",
+        "Pain management",
+        "IV fluids"
+      ],
+      "prevention": [
+        "High-fiber diet may reduce risk",
+        "No proven prevention methods"
+      ],
+      "when_to_see_doctor": "Immediate medical attention for severe abdominal pain, especially in lower right abdomen",
+      "complications": ["ruptured_appendix", "peritonitis", "abscess", "sepsis", "death_if_untreated"]
+    },
+    "diabetes": {
+      "name": "Diabetes Mellitus",
+      "description": "Chronic condition affecting how the body processes blood sugar (glucose). Type 1 is autoimmune, Type 2 is related to insulin resistance.",
+      "common_symptoms": ["increased_thirst", "frequent_urination", "extreme_hunger", "unexplained_weight_loss", "fatigue", "blurred_vision", "slow_healing_sores"],
+      "causes": ["type_1_autoimmune_destruction", "type_2_insulin_resistance", "genetic_factors", "obesity", "sedentary_lifestyle"],
+      "risk_factors": [
+        "Family history",
+        "Obesity",
+        "Age over 45",
+        "Sedentary lifestyle",
+        "High blood pressure",
+        "Abnormal cholesterol levels",
+        "Gestational diabetes history"
+      ],
+      "diagnosis_methods": [
+        "Fasting blood sugar test",
+        "A1C test (average blood sugar over 3 months)",
+        "Oral glucose tolerance test",
+        "Random blood sugar test"
+      ],
+      "treatment_options": [
+        "Type 1: Insulin therapy (injections or pump)",
+        "Type 2: Lifestyle changes, oral medications, insulin if needed",
+        "Blood sugar monitoring",
+        "Healthy diet and exercise",
+        "Metformin, sulfonylureas, GLP-1 agonists",
+        "Regular medical checkups"
+      ],
+      "prevention": [
+        "Maintain healthy weight",
+        "Regular physical activity",
+        "Eat healthy diet",
+        "Avoid smoking",
+        "Control blood pressure and cholesterol"
+      ],
+      "when_to_see_doctor": "Symptoms of diabetes, blood sugar consistently high or low, signs of complications",
+      "complications": ["heart_disease", "stroke", "kidney_disease", "nerve_damage", "eye_damage", "foot_damage", "skin_conditions", "alzheimers_disease"]
+    },
+    "hypertension": {
+      "name": "Hypertension (High Blood Pressure)",
+      "description": "Condition where blood pressure in arteries is persistently elevated. Often called 'silent killer' as it usually has no symptoms.",
+      "common_symptoms": ["usually_no_symptoms", "severe_headache", "nosebleeds", "shortness_of_breath", "chest_pain"],
+      "causes": ["unknown_primary", "kidney_disease", "adrenal_disorders", "thyroid_problems", "certain_medications", "sleep_apnea"],
+      "risk_factors": [
+        "Age",
+        "Family history",
+        "Obesity",
+        "Lack of physical activity",
+        "High salt diet",
+        "Excessive alcohol",
+        "Stress",
+        "Chronic kidney disease"
+      ],
+      "diagnosis_methods": [
+        "Blood pressure measurement (multiple readings)",
+        "Ambulatory blood pressure monitoring",
+        "Blood tests",
+        "Urine tests",
+        "ECG",
+        "Echocardiogram"
+      ],
+      "treatment_options": [
+        "Lifestyle modifications (diet, exercise, weight loss)",
+        "ACE inhibitors",
+        "Angiotensin II receptor blockers",
+        "Calcium channel blockers",
+        "Diuretics",
+        "Beta blockers",
+        "Combination medications"
+      ],
+      "prevention": [
+        "Healthy diet (DASH diet)",
+        "Regular exercise",
+        "Maintain healthy weight",
+        "Limit alcohol",
+        "Reduce sodium intake",
+        "Manage stress",
+        "Don't smoke"
+      ],
+      "when_to_see_doctor": "Blood pressure consistently above 130/80, symptoms of hypertensive crisis (above 180/120)",
+      "complications": ["heart_attack", "stroke", "heart_failure", "kidney_disease", "vision_loss", "sexual_dysfunction", "peripheral_artery_disease"]
+    }
+  }

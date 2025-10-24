@@ -1,0 +1,181 @@
+{
+    "fever": {
+      "description": "Elevated body temperature above 100.4°F (38°C), indicating the body is fighting an infection or illness",
+      "possible_diseases": ["flu", "covid19", "malaria", "pneumonia", "urinary_tract_infection", "common_cold"],
+      "severity_indicators": {
+        "mild": "Temperature 100.4-101°F, manageable with rest",
+        "moderate": "Temperature 101-103°F, persistent for 2-3 days",
+        "severe": "Temperature above 103°F, lasting more than 3 days, or accompanied by confusion"
+      },
+      "emergency_signs": [
+        "Temperature above 105°F",
+        "Fever with severe headache and stiff neck",
+        "Fever with difficulty breathing",
+        "Fever in infant under 3 months",
+        "Fever with seizures"
+      ],
+      "common_causes": ["viral infection", "bacterial infection", "heat exhaustion", "inflammatory conditions"],
+      "related_symptoms": ["chills", "sweating", "headache", "muscle_aches", "fatigue"]
+    },
+    "headache": {
+      "description": "Pain or discomfort in the head, scalp, or neck region",
+      "possible_diseases": ["migraine", "tension_headache", "cluster_headache", "sinusitis", "meningitis", "brain_tumor"],
+      "severity_indicators": {
+        "mild": "Dull ache, doesn't interfere with daily activities",
+        "moderate": "Noticeable pain, some difficulty concentrating",
+        "severe": "Intense pain, unable to perform normal activities, may include nausea"
+      },
+      "emergency_signs": [
+        "Sudden severe headache (worst of your life)",
+        "Headache with fever and stiff neck",
+        "Headache after head injury",
+        "Headache with vision changes or difficulty speaking",
+        "Headache with weakness or numbness"
+      ],
+      "common_causes": ["stress", "dehydration", "lack of sleep", "eye strain", "sinus pressure"],
+      "related_symptoms": ["nausea", "sensitivity_to_light", "dizziness", "neck_pain"]
+    },
+    "cough": {
+      "description": "Sudden expulsion of air from the lungs to clear airways of irritants, mucus, or foreign particles",
+      "possible_diseases": ["common_cold", "flu", "covid19", "bronchitis", "pneumonia", "asthma", "tuberculosis"],
+      "severity_indicators": {
+        "mild": "Occasional dry cough, no other symptoms",
+        "moderate": "Persistent cough with mucus, interferes with sleep",
+        "severe": "Coughing up blood, severe chest pain, difficulty breathing"
+      },
+      "emergency_signs": [
+        "Coughing up blood",
+        "Severe difficulty breathing",
+        "Cough with high fever above 103°F",
+        "Cough lasting more than 3 weeks",
+        "Cough with chest pain and rapid heartbeat"
+      ],
+      "common_causes": ["viral infection", "allergies", "postnasal drip", "acid reflux", "smoking"],
+      "related_symptoms": ["sore_throat", "runny_nose", "chest_congestion", "wheezing", "shortness_of_breath"]
+    },
+    "chest_pain": {
+      "description": "Discomfort or pain felt anywhere in the chest area, from neck to upper abdomen",
+      "possible_diseases": ["heart_attack", "angina", "pulmonary_embolism", "pneumonia", "acid_reflux", "panic_attack"],
+      "severity_indicators": {
+        "mild": "Brief discomfort, related to movement or breathing",
+        "moderate": "Persistent pressure or tightness",
+        "severe": "Crushing pain, radiating to arm/jaw, with sweating and shortness of breath"
+      },
+      "emergency_signs": [
+        "Crushing chest pain lasting more than 5 minutes",
+        "Pain radiating to arm, jaw, or back",
+        "Chest pain with shortness of breath",
+        "Chest pain with sweating and nausea",
+        "Sudden sharp chest pain with difficulty breathing"
+      ],
+      "common_causes": ["heart disease", "lung problems", "digestive issues", "muscle strain", "anxiety"],
+      "related_symptoms": ["shortness_of_breath", "sweating", "nausea", "dizziness", "rapid_heartbeat"]
+    },
+    "shortness_of_breath": {
+      "description": "Difficulty breathing or feeling unable to get enough air",
+      "possible_diseases": ["asthma", "pneumonia", "covid19", "heart_failure", "pulmonary_embolism", "anxiety"],
+      "severity_indicators": {
+        "mild": "Breathlessness only with exertion",
+        "moderate": "Difficulty breathing with minimal activity",
+        "severe": "Breathlessness at rest, unable to speak full sentences"
+      },
+      "emergency_signs": [
+        "Sudden severe difficulty breathing",
+        "Blue lips or face",
+        "Chest pain with breathing difficulty",
+        "Confusion or altered mental state",
+        "Inability to speak due to breathlessness"
+      ],
+      "common_causes": ["lung disease", "heart problems", "obesity", "anxiety", "anemia"],
+      "related_symptoms": ["chest_pain", "wheezing", "cough", "rapid_heartbeat", "dizziness"]
+    },
+    "nausea": {
+      "description": "Feeling of sickness with an urge to vomit",
+      "possible_diseases": ["gastroenteritis", "food_poisoning", "migraine", "pregnancy", "appendicitis", "motion_sickness"],
+      "severity_indicators": {
+        "mild": "Occasional queasiness, able to eat small amounts",
+        "moderate": "Persistent nausea, difficulty eating",
+        "severe": "Constant nausea with vomiting, unable to keep fluids down"
+      },
+      "emergency_signs": [
+        "Nausea with severe abdominal pain",
+        "Vomiting blood",
+        "Signs of dehydration (dark urine, dizziness)",
+        "Nausea with chest pain",
+        "Severe headache with nausea and stiff neck"
+      ],
+      "common_causes": ["viral infection", "food poisoning", "medication side effects", "pregnancy", "anxiety"],
+      "related_symptoms": ["vomiting", "dizziness", "abdominal_pain", "loss_of_appetite", "weakness"]
+    },
+    "fatigue": {
+      "description": "Persistent tiredness or exhaustion that doesn't improve with rest",
+      "possible_diseases": ["anemia", "depression", "thyroid_disorder", "chronic_fatigue_syndrome", "diabetes", "sleep_apnea"],
+      "severity_indicators": {
+        "mild": "Feeling tired but able to complete daily tasks",
+        "moderate": "Significant tiredness affecting work or activities",
+        "severe": "Extreme exhaustion, unable to perform basic activities"
+      },
+      "emergency_signs": [
+        "Sudden extreme fatigue with chest pain",
+        "Fatigue with confusion or difficulty breathing",
+        "Fatigue with severe weakness or numbness",
+        "Unexplained fatigue with significant weight loss"
+      ],
+      "common_causes": ["lack of sleep", "stress", "poor diet", "medical conditions", "medications"],
+      "related_symptoms": ["weakness", "difficulty_concentrating", "muscle_aches", "headache", "irritability"]
+    },
+    "abdominal_pain": {
+      "description": "Pain or discomfort in the stomach or belly area",
+      "possible_diseases": ["appendicitis", "gastroenteritis", "irritable_bowel_syndrome", "kidney_stones", "ulcer", "gallstones"],
+      "severity_indicators": {
+        "mild": "Mild cramping or discomfort",
+        "moderate": "Persistent pain affecting daily activities",
+        "severe": "Intense pain, rigid abdomen, unable to move comfortably"
+      },
+      "emergency_signs": [
+        "Severe pain in lower right abdomen",
+        "Abdominal pain with vomiting blood",
+        "Rigid, board-like abdomen",
+        "Pain with fever and inability to pass stool",
+        "Abdominal pain with fainting or shock"
+      ],
+      "common_causes": ["indigestion", "gas", "constipation", "menstrual cramps", "food intolerance"],
+      "related_symptoms": ["nausea", "vomiting", "diarrhea", "bloating", "loss_of_appetite"]
+    },
+    "dizziness": {
+      "description": "Feeling lightheaded, unsteady, or experiencing a spinning sensation",
+      "possible_diseases": ["vertigo", "inner_ear_infection", "low_blood_pressure", "anemia", "dehydration", "heart_problems"],
+      "severity_indicators": {
+        "mild": "Brief lightheadedness when standing",
+        "moderate": "Frequent dizziness affecting balance",
+        "severe": "Severe spinning sensation, unable to stand, with vomiting"
+      },
+      "emergency_signs": [
+        "Dizziness with chest pain",
+        "Dizziness with severe headache",
+        "Dizziness with difficulty speaking or weakness",
+        "Dizziness with rapid or irregular heartbeat",
+        "Fainting or loss of consciousness"
+      ],
+      "common_causes": ["dehydration", "low blood sugar", "medication side effects", "anxiety", "inner ear problems"],
+      "related_symptoms": ["nausea", "balance_problems", "headache", "ringing_in_ears", "blurred_vision"]
+    },
+    "sore_throat": {
+      "description": "Pain, scratchiness, or irritation of the throat",
+      "possible_diseases": ["common_cold", "flu", "strep_throat", "tonsillitis", "mononucleosis", "covid19"],
+      "severity_indicators": {
+        "mild": "Slight scratchiness, improves with fluids",
+        "moderate": "Painful swallowing, persistent discomfort",
+        "severe": "Extreme pain, difficulty swallowing, drooling, breathing difficulty"
+      },
+      "emergency_signs": [
+        "Difficulty breathing or swallowing",
+        "Drooling or inability to swallow saliva",
+        "Severe throat pain with high fever",
+        "Swelling in neck or throat",
+        "Muffled voice or difficulty opening mouth"
+      ],
+      "common_causes": ["viral infection", "bacterial infection", "allergies", "dry air", "acid reflux"],
+      "related_symptoms": ["cough", "runny_nose", "fever", "swollen_glands", "hoarseness"]
+    }
+  }
