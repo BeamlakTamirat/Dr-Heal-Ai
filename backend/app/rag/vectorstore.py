@@ -75,12 +75,6 @@ class MedicalVectorStore:
                 metadatas=metadatas
             )
 
-            self.collection.upsert(
-                ids=ids,
-                embeddings=embeddings_list,
-                documents=texts,
-                metadatas=metadatas
-            )
             
             logger.info(f"Successfully added {len(texts)} documents")
             
