@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.rag import router as rag_router
+
 app = FastAPI(
     title="Dr.Heal AI API",
     description="AI-powered medical assistant API",
@@ -14,6 +16,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(rag_router)
 
 @app.get("/")
 async def root():
