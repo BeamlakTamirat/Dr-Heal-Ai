@@ -8,6 +8,7 @@ from app.api.auth import router as auth_router
 from app.api.conversations import router as conversations_router
 from app.api.medical_history import router as medical_history_router
 from app.database.connection import get_db_manager
+from app.middleware import RateLimitMiddleware
 
 logger = logging.getLogger(__name__)
 
@@ -16,6 +17,8 @@ app = FastAPI(
     description="AI-powered medical assistant with multi-agent system",
     version="2.0.0"
 )
+
+app.add_middleware(RateLimitMiddleware, calls=100, period=60)
 
 app.add_middleware(
     CORSMiddleware,
@@ -53,7 +56,8 @@ async def root():
             "Multi-agent medical assistant",
             "User authentication",
             "Conversation history",
-            "Medical history tracking"
+            "Medical history tracking",
+            "Rate limiting (100 req/min)"
         ]
     }
 

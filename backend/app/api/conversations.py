@@ -1,10 +1,10 @@
-
 from fastapi import APIRouter, HTTPException, status, Depends
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from datetime import datetime
 import logging
+import uuid
 
 from app.database.connection import get_db
 from app.models.database import User, Conversation, Message, MedicalHistory
@@ -95,9 +95,10 @@ async def get_conversation(
 ):
     
     try:
+        conversation_id_uuid = uuid.UUID(conversation_id)
         conversation = db.query(Conversation)\
             .filter(
-                Conversation.id == conversation_id,
+                Conversation.id == conversation_id_uuid,
                 Conversation.user_id == current_user.id
             )\
             .first()
@@ -109,7 +110,7 @@ async def get_conversation(
             )
         
         messages = db.query(Message)\
-            .filter(Message.conversation_id == conversation_id)\
+            .filter(Message.conversation_id == conversation_id_uuid)\
             .order_by(Message.timestamp.asc())\
             .all()
         
@@ -149,9 +150,10 @@ async def chat(
     
     try:
         if request.conversation_id:
+            conversation_id_uuid = uuid.UUID(request.conversation_id)
             conversation = db.query(Conversation)\
                 .filter(
-                    Conversation.id == request.conversation_id,
+                    Conversation.id == conversation_id_uuid,
                     Conversation.user_id == current_user.id
                 )\
                 .first()
@@ -205,13 +207,15 @@ async def chat(
         
         conversation.updated_at = datetime.utcnow()
         
-        if agent_used == "EmergencyTriage":
+        if agent_used in ["SymptomAnalyzer", "EmergencyTriage"]:
+            severity = "severe" if agent_used == "EmergencyTriage" else "moderate"
+            
             medical_entry = MedicalHistory(
                 user_id=current_user.id,
                 symptoms=request.query,
                 agent_assessment=response_text,
-                emergency_detected="true",
-                severity="severe"
+                emergency_detected="true" if agent_used == "EmergencyTriage" else "false",
+                severity=severity
             )
             db.add(medical_entry)
         
@@ -244,13 +248,12 @@ async def delete_conversation(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
-    """
-    Delete a conversation and all its messages.
-    """
+    
     try:
+        conversation_id_uuid = uuid.UUID(conversation_id)
         conversation = db.query(Conversation)\
             .filter(
-                Conversation.id == conversation_id,
+                Conversation.id == conversation_id_uuid,
                 Conversation.user_id == current_user.id
             )\
             .first()
