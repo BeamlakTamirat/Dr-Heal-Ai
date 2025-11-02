@@ -4,6 +4,7 @@ import logging
 
 from app.rag.medical_rag import get_medical_rag
 from app.llm.gemini import get_gemini_llm
+from app.agents.tools.web_search import MedicalWebSearchTool
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -16,8 +17,9 @@ class BaseAgent(ABC):
         self.role = role
         self.rag = get_medical_rag()
         self.llm = get_gemini_llm()
+        self.web_search = MedicalWebSearchTool()
         
-        logger.info(f"Initialized {self.name} agent")
+        logger.info(f"Initialized {name} agent")
     
     
     @abstractmethod
