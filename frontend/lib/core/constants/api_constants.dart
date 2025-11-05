@@ -1,5 +1,16 @@
+import 'dart:io';
+
 class ApiConstants {
-  static const String baseUrl = 'http://localhost:8000';
+  // Auto-detect the correct base URL
+  static String get baseUrl {
+    if (Platform.isAndroid) {
+      return 'http://192.168.1.100:8000'; // CHANGE THIS TO YOUR IP
+    } else if (Platform.isIOS) {
+      return 'http://localhost:8000';
+    } else {
+      return 'http://localhost:8000';
+    }
+  }
   
   // Auth Endpoints
   static const String login = '/api/auth/login';
