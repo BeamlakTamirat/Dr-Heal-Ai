@@ -29,7 +29,9 @@ class DrHealApp extends StatelessWidget {
     return MaterialApp(
       title: 'Dr.Heal AI',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.darkTheme,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.system,
       home: const LoginPage(),
     );
   }

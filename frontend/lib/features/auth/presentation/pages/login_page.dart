@@ -67,14 +67,18 @@ class _LoginPageState extends State<LoginPage> {
                             .createShader(bounds),
                         child: Text(
                           'Dr.Heal AI',
-                          style: Theme.of(context).textTheme.displayLarge,
+                          style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                                color: Colors.white,
+                              ),
                         ),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         'Your AI Health Companion',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Colors.white60,
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.white60
+                                  : const Color(0xFF64748B),
                             ),
                       ),
                       const SizedBox(height: 40),
@@ -83,20 +87,32 @@ class _LoginPageState extends State<LoginPage> {
                       TextFormField(
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
-                        style: const TextStyle(color: Colors.white),
+                        style: TextStyle(
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : const Color(0xFF0F172A),
+                        ),
                         decoration: InputDecoration(
                           labelText: 'Email',
-                          labelStyle: TextStyle(color: Colors.white60),
+                          labelStyle: TextStyle(
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white60
+                                : const Color(0xFF64748B),
+                          ),
                           prefixIcon: Container(
                             margin: const EdgeInsets.all(8),
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: AppTheme.glassBackground,
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? AppTheme.darkGlassBackground
+                                  : AppTheme.lightGlassBackground,
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.email_outlined,
-                              color: Colors.white70,
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.white70
+                                  : const Color(0xFF64748B),
                               size: 20,
                             ),
                           ),
@@ -117,20 +133,32 @@ class _LoginPageState extends State<LoginPage> {
                       TextFormField(
                         controller: _passwordController,
                         obscureText: true,
-                        style: const TextStyle(color: Colors.white),
+                        style: TextStyle(
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : const Color(0xFF0F172A),
+                        ),
                         decoration: InputDecoration(
                           labelText: 'Password',
-                          labelStyle: TextStyle(color: Colors.white60),
+                          labelStyle: TextStyle(
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white60
+                                : const Color(0xFF64748B),
+                          ),
                           prefixIcon: Container(
                             margin: const EdgeInsets.all(8),
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: AppTheme.glassBackground,
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? AppTheme.darkGlassBackground
+                                  : AppTheme.lightGlassBackground,
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.lock_outline,
-                              color: Colors.white70,
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.white70
+                                  : const Color(0xFF64748B),
                               size: 20,
                             ),
                           ),
@@ -168,7 +196,9 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text(
                           "Don't have an account? Sign Up",
                           style: TextStyle(
-                            color: Colors.white60,
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white60
+                                : const Color(0xFF64748B),
                             fontSize: 14,
                           ),
                         ),

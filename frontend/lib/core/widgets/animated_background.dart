@@ -31,6 +31,8 @@ class _AnimatedBackgroundState extends State<AnimatedBackground>
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
@@ -40,13 +42,13 @@ class _AnimatedBackgroundState extends State<AnimatedBackground>
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                AppTheme.background,
+                isDark ? AppTheme.darkBackground : AppTheme.lightBackground,
                 Color.lerp(
-                  AppTheme.background,
-                  AppTheme.surface,
+                  isDark ? AppTheme.darkBackground : AppTheme.lightBackground,
+                  isDark ? AppTheme.darkSurface : AppTheme.lightSurface,
                   _controller.value,
                 )!,
-                AppTheme.background,
+                isDark ? AppTheme.darkBackground : AppTheme.lightBackground,
               ],
             ),
           ),
