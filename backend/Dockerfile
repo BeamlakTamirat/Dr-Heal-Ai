@@ -1,7 +1,6 @@
-# Multi-stage build for optimized Railway deployment with ChromaDB
+# Multi-stage build optimized for Railway deployment
 FROM python:3.11-slim as builder
 
-# Set working directory
 WORKDIR /app
 
 # Install build dependencies
@@ -11,15 +10,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first for better layer caching
+# Copy requirements first
 COPY requirements.txt .
 
-# Create virtual environment and install dependencies
+# Create virtual environment
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Install Python packages with optimizations
+# Install CPU-only PyTorch (800MB vs 6GB CUDA version)
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel && \
+    pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu && \
     pip install --no-cache-dir -r requirements.txt
 
 # ============================================
@@ -29,7 +29,7 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install only runtime dependencies
+# Install runtime dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     libgomp1 \
@@ -47,11 +47,10 @@ ENV PATH="/opt/venv/bin:$PATH" \
 # Copy application code
 COPY . .
 
-# Create necessary directories with proper permissions
+# Create directories
 RUN mkdir -p /app/chroma_db /app/data/medical_knowledge && \
     chmod -R 755 /app/chroma_db /app/data/medical_knowledge
 
-# Expose port
 EXPOSE 8080
 
 # Health check
