@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/widgets/animated_background.dart';
 import '../../../../core/widgets/glass_card.dart';
 import '../../../../core/widgets/glass_button.dart';
@@ -63,29 +64,28 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      
+
                       // Title with gradient
                       ShaderMask(
-                        shaderCallback: (bounds) => AppTheme.primaryGradient
-                            .createShader(bounds),
+                        shaderCallback: (bounds) =>
+                            AppTheme.primaryGradient.createShader(bounds),
                         child: Text(
                           'Dr.Heal AI',
-                          style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                                color: Colors.white,
-                              ),
+                          style: Theme.of(context).textTheme.displayLarge
+                              ?.copyWith(color: Colors.white),
                         ),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         'Your AI Health Companion',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Theme.of(context).brightness == Brightness.dark
-                                  ? Colors.white60
-                                  : const Color(0xFF64748B),
-                            ),
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white60
+                              : const Color(0xFF64748B),
+                        ),
                       ),
                       const SizedBox(height: 40),
-                      
+
                       // Email Field
                       TextFormField(
                         controller: _emailController,
@@ -98,7 +98,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         decoration: InputDecoration(
                           labelText: 'Email',
                           labelStyle: TextStyle(
-                            color: Theme.of(context).brightness == Brightness.dark
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
                                 ? Colors.white60
                                 : const Color(0xFF64748B),
                           ),
@@ -106,14 +107,18 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             margin: const EdgeInsets.all(8),
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: Theme.of(context).brightness == Brightness.dark
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
                                   ? AppTheme.darkGlassBackground
                                   : AppTheme.lightGlassBackground,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Icon(
                               Icons.email_outlined,
-                              color: Theme.of(context).brightness == Brightness.dark
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
                                   ? Colors.white70
                                   : const Color(0xFF64748B),
                               size: 20,
@@ -131,7 +136,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         },
                       ),
                       const SizedBox(height: 16),
-                      
+
                       // Password Field
                       TextFormField(
                         controller: _passwordController,
@@ -144,7 +149,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         decoration: InputDecoration(
                           labelText: 'Password',
                           labelStyle: TextStyle(
-                            color: Theme.of(context).brightness == Brightness.dark
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
                                 ? Colors.white60
                                 : const Color(0xFF64748B),
                           ),
@@ -152,14 +158,18 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             margin: const EdgeInsets.all(8),
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: Theme.of(context).brightness == Brightness.dark
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
                                   ? AppTheme.darkGlassBackground
                                   : AppTheme.lightGlassBackground,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Icon(
                               Icons.lock_outline,
-                              color: Theme.of(context).brightness == Brightness.dark
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
                                   ? Colors.white70
                                   : const Color(0xFF64748B),
                               size: 20,
@@ -177,7 +187,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         },
                       ),
                       const SizedBox(height: 32),
-                      
+
                       // Login Button
                       GlassButton(
                         text: 'Login',
@@ -186,20 +196,17 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         onPressed: _handleLogin,
                       ),
                       const SizedBox(height: 16),
-                      
+
                       // Register Link
                       TextButton(
                         onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Register page coming soon!'),
-                            ),
-                          );
+                          context.go('/register');
                         },
                         child: Text(
                           "Don't have an account? Sign Up",
                           style: TextStyle(
-                            color: Theme.of(context).brightness == Brightness.dark
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
                                 ? Colors.white60
                                 : const Color(0xFF64748B),
                             fontSize: 14,
@@ -220,19 +227,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   void _handleLogin() async {
     if (_formKey.currentState!.validate()) {
       try {
-        await ref.read(authProvider.notifier).login(
+        await ref
+            .read(authProvider.notifier)
+            .login(
               email: _emailController.text.trim(),
               password: _passwordController.text,
             );
 
         if (mounted && ref.read(authProvider).isAuthenticated) {
-          // TODO: Navigate to home screen
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Login successful!'),
-              backgroundColor: AppTheme.success,
-            ),
-          );
+          context.go('/home');
         }
       } catch (e) {
         if (mounted) {
