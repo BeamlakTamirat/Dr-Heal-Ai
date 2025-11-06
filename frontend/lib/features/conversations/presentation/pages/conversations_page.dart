@@ -50,23 +50,23 @@ class _ConversationsPageState extends ConsumerState<ConversationsPage> {
                       const SizedBox(height: 24),
                       Text(
                         'No conversations yet',
-                        style: Theme.of(context).textTheme.displayMedium
-                            ?.copyWith(
-                              color:
-                                  Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? Colors.white54
-                                  : Colors.black54,
-                            ),
+                        style:
+                            Theme.of(context).textTheme.displayMedium?.copyWith(
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.white54
+                                      : Colors.black54,
+                                ),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         'Start a new chat to begin',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white38
-                              : Colors.black38,
-                        ),
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.white38
+                                  : Colors.black38,
+                            ),
                       ),
                       const SizedBox(height: 24),
                       ElevatedButton.icon(
@@ -131,13 +131,16 @@ class _ConversationsPageState extends ConsumerState<ConversationsPage> {
                       );
                     },
                     onDismissed: (direction) async {
+                      // Capture context before async gap
+                      final scaffoldMessenger = ScaffoldMessenger.of(context);
+
                       try {
                         final chatService = ref.read(chatServiceProvider);
                         await chatService.deleteConversation(conversation.id);
                         ref.invalidate(conversationsProvider);
 
                         if (mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
+                          scaffoldMessenger.showSnackBar(
                             const SnackBar(
                               content: Text('Conversation deleted'),
                               backgroundColor: AppTheme.success,
@@ -146,7 +149,7 @@ class _ConversationsPageState extends ConsumerState<ConversationsPage> {
                         }
                       } catch (e) {
                         if (mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
+                          scaffoldMessenger.showSnackBar(
                             SnackBar(
                               content: Text(
                                 'Failed to delete: ${e.toString()}',
@@ -163,7 +166,8 @@ class _ConversationsPageState extends ConsumerState<ConversationsPage> {
                       child: ListTile(
                         contentPadding: EdgeInsets.zero,
                         leading: CircleAvatar(
-                          backgroundColor: AppTheme.primary.withOpacity(0.2),
+                          backgroundColor:
+                              AppTheme.primary.withValues(alpha: 0.2),
                           child: const Icon(
                             Icons.chat_bubble_outline,
                             color: AppTheme.primary,
@@ -173,7 +177,9 @@ class _ConversationsPageState extends ConsumerState<ConversationsPage> {
                           conversation.title,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.bodyLarge
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge
                               ?.copyWith(fontWeight: FontWeight.w600),
                         ),
                         subtitle: Padding(

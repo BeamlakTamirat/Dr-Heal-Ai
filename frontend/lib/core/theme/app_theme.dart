@@ -34,14 +34,12 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.dark,
       scaffoldBackgroundColor: darkBackground,
-
       colorScheme: const ColorScheme.dark(
         primary: primary,
         secondary: secondary,
         surface: darkSurface,
         error: danger,
       ),
-
       textTheme: GoogleFonts.interTextTheme(
         const TextTheme(
           displayLarge: TextStyle(
@@ -67,7 +65,6 @@ class AppTheme {
           ),
         ),
       ),
-
       cardTheme: const CardThemeData(
         color: darkCard,
         elevation: 0,
@@ -75,13 +72,11 @@ class AppTheme {
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
       ),
-
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: false,
       ),
-
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: darkGlassBackground,
@@ -102,13 +97,12 @@ class AppTheme {
           vertical: 16,
         ),
       ),
-
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: primary,
           foregroundColor: Colors.white,
           elevation: 0,
-          shadowColor: primary.withOpacity(0.5),
+          shadowColor: primary.withValues(alpha: 0.5),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
@@ -123,14 +117,12 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.light,
       scaffoldBackgroundColor: lightBackground,
-
       colorScheme: const ColorScheme.light(
         primary: primary,
         secondary: secondary,
         surface: lightSurface,
         error: danger,
       ),
-
       textTheme: GoogleFonts.interTextTheme(
         const TextTheme(
           displayLarge: TextStyle(
@@ -156,7 +148,6 @@ class AppTheme {
           ),
         ),
       ),
-
       cardTheme: const CardThemeData(
         color: lightCard,
         elevation: 0,
@@ -164,14 +155,12 @@ class AppTheme {
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
       ),
-
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: false,
         foregroundColor: Color(0xFF0F172A),
       ),
-
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: lightGlassBackground,
@@ -192,13 +181,12 @@ class AppTheme {
           vertical: 16,
         ),
       ),
-
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: primary,
           foregroundColor: Colors.white,
           elevation: 0,
-          shadowColor: primary.withOpacity(0.5),
+          shadowColor: primary.withValues(alpha: 0.5),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),

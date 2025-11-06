@@ -8,7 +8,6 @@ class ApiConstants {
   static String get baseUrl {
     if (Platform.isAndroid || Platform.isIOS) {
       // Use production URL for mobile devices
-      // TODO: Update this URL after Railway deployment
       return _productionUrl;
     } else {
       // Use localhost for desktop/web development

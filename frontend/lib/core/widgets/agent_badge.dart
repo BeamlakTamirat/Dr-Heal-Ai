@@ -93,13 +93,13 @@ class AgentBadge extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
-                  colors: [color, color.withOpacity(0.7)],
+                  colors: [color, color.withValues(alpha: 0.7)],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: color.withOpacity(0.4),
+                    color: color.withValues(alpha: 0.4),
                     blurRadius: 20,
                     spreadRadius: isActive ? 4 : 0,
                   ),
@@ -108,7 +108,7 @@ class AgentBadge extends StatelessWidget {
               child: Icon(icon, color: Colors.white, size: size * 0.5),
             )
             .animate(onPlay: (controller) => controller.repeat())
-            .shimmer(duration: 2000.ms, color: Colors.white.withOpacity(0.3))
+            .shimmer(duration: 2000.ms, color: Colors.white.withValues(alpha: 0.3))
             .then()
             .scale(
               duration: 1000.ms,
@@ -128,9 +128,9 @@ class AgentBadge extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.2),
+              color: color.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: color.withOpacity(0.4), width: 1),
+              border: Border.all(color: color.withValues(alpha: 0.4), width: 1),
             ),
             child: Text(
               label,

@@ -15,8 +15,6 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
-  final int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
@@ -134,8 +132,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                     Icon(
                                       Icons.chat_bubble_outline,
                                       size: 64,
-                                      color:
-                                          Theme.of(context).brightness ==
+                                      color: Theme.of(context).brightness ==
                                               Brightness.dark
                                           ? Colors.white24
                                           : Colors.black26,
@@ -149,9 +146,9 @@ class _HomePageState extends ConsumerState<HomePage> {
                                           ?.copyWith(
                                             color:
                                                 Theme.of(context).brightness ==
-                                                    Brightness.dark
-                                                ? Colors.white54
-                                                : Colors.black54,
+                                                        Brightness.dark
+                                                    ? Colors.white54
+                                                    : Colors.black54,
                                           ),
                                     ),
                                   ],
@@ -172,7 +169,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                     contentPadding: EdgeInsets.zero,
                                     leading: CircleAvatar(
                                       backgroundColor: AppTheme.primary
-                                          .withOpacity(0.2),
+                                          .withValues(alpha: 0.2),
                                       child: const Icon(
                                         Icons.chat_bubble_outline,
                                         color: AppTheme.primary,
@@ -249,12 +246,15 @@ class _QuickActionButton extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [color.withOpacity(0.2), color.withOpacity(0.1)],
+            colors: [
+              color.withValues(alpha: 0.2),
+              color.withValues(alpha: 0.1)
+            ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: color.withOpacity(0.3), width: 1),
+          border: Border.all(color: color.withValues(alpha: 0.3), width: 1),
         ),
         child: Column(
           children: [
@@ -263,9 +263,9 @@ class _QuickActionButton extends StatelessWidget {
             Text(
               label,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: color,
-                fontWeight: FontWeight.w600,
-              ),
+                    color: color,
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
           ],
         ),

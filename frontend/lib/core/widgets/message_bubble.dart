@@ -121,7 +121,7 @@ class MessageBubble extends StatelessWidget {
                     boxShadow: [
                       BoxShadow(
                         color: isUser
-                            ? AppTheme.primary.withOpacity(0.3)
+                            ? AppTheme.primary.withValues(alpha: 0.3)
                             : (isDark ? Colors.black26 : Colors.black12),
                         blurRadius: 12,
                         offset: const Offset(0, 4),

@@ -58,7 +58,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: AppTheme.primary.withOpacity(0.4),
+                              color: AppTheme.primary.withValues(alpha: 0.4),
                               blurRadius: 20,
                               spreadRadius: 4,
                             ),

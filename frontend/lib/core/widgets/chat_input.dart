@@ -114,15 +114,15 @@ class _ChatInputState extends State<ChatInput> {
                           ? AppTheme.primaryGradient
                           : LinearGradient(
                               colors: [
-                                Colors.grey.withOpacity(0.3),
-                                Colors.grey.withOpacity(0.2),
+                                Colors.grey.withValues(alpha: 0.3),
+                                Colors.grey.withValues(alpha: 0.2),
                               ],
                             ),
                       shape: BoxShape.circle,
                       boxShadow: _hasText && !widget.isLoading
                           ? [
                               BoxShadow(
-                                color: AppTheme.primary.withOpacity(0.4),
+                                color: AppTheme.primary.withValues(alpha: 0.4),
                                 blurRadius: 12,
                                 spreadRadius: 2,
                               ),

@@ -175,7 +175,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
             if (chatState.error != null)
               Container(
                 padding: const EdgeInsets.all(16),
-                color: AppTheme.danger.withOpacity(0.1),
+                color: AppTheme.danger.withValues(alpha: 0.1),
                 child: Row(
                   children: [
                     const Icon(Icons.error_outline, color: AppTheme.danger),
