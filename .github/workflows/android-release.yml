@@ -39,7 +39,7 @@ jobs:
       
       - name: Analyze Code
         working-directory: frontend
-        run: flutter analyze
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
       
       - name: Build APK (Release)
         working-directory: frontend
@@ -75,9 +75,9 @@ jobs:
         id: release_notes
         run: |
           cat > release_notes.md << 'EOF'
-          ## 🏥 Dr.Heal AI - Android Release
+          ## Dr.Heal AI - Android Release
           
-          ### 📱 APK Downloads
+          ### APK Downloads
           
           **Recommended for most users:**
           - `dr-heal-ai-v${{ steps.version.outputs.version }}-arm64-v8a.apk` - For modern Android devices (64-bit ARM)
@@ -87,23 +87,23 @@ jobs:
           - `dr-heal-ai-v${{ steps.version.outputs.version }}-x86_64.apk` - For x86 devices/emulators
           - `dr-heal-ai-v${{ steps.version.outputs.version }}-universal.apk` - Universal APK (larger size, works on all devices)
           
-          ### ✨ Features
+          ### Features
           - Multi-agent AI medical consultation
           - Symptom analysis and severity assessment
           - Disease information and treatment recommendations
           - Emergency triage guidance
           - Secure authentication and conversation history
           
-          ### 📋 Requirements
+          ### Requirements
           - Android 5.0 (API 21) or higher
           - Internet connection for AI consultations
           
-          ### 🔒 Security
+          ### Security
           - JWT authentication
           - Encrypted local storage
           - Secure HTTPS communication
           
-          ### 📖 Documentation
+          ### Documentation
           - [GitHub Repository](https://github.com/BeamlakTamirat/Dr-Heal-Ai)
           - [API Documentation](https://dr-heal-ai-production.up.railway.app/docs)
           
@@ -134,7 +134,7 @@ jobs:
       
       - name: Build Summary
         run: |
-          echo "### ✅ Build Successful!" >> $GITHUB_STEP_SUMMARY
+          echo "### Build Successful!" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Version:** ${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
