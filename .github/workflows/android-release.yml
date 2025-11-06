@@ -1,10 +1,12 @@
-name: Android Release Build
+name: Dr. Heal Ai - Build APK
 
 on:
   push:
     tags:
-      - 'v*.*.*'  # Triggers on version tags like v1.0.0, v1.2.3
-  workflow_dispatch:  # Allows manual trigger from GitHub Actions tab
+      - 'v*.*.*'  
+  workflow_dispatch:  
+permissions:
+  contents: write  
 
 jobs:
   build-android:
@@ -25,7 +27,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.5'  # Latest stable with Dart 3.8+
+          flutter-version: '3.35.5' 
           channel: 'stable'
           cache: true
       
