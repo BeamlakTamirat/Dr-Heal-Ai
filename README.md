@@ -8,7 +8,17 @@
 
 > **A production-ready, multi-agent AI system for medical consultation and health guidance**
 
-Dr.Heal AI is an intelligent medical assistant that leverages a sophisticated multi-agent architecture to provide personalized health consultations. Built with LangGraph orchestration, the system coordinates specialized AI agents to analyze symptoms, provide disease information, recommend treatments, and handle medical emergencies.
+
+  
+
+
+[![Download APK](https://img.shields.io/badge/Download-Android_APK-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://github.com/BeamlakTamirat/Dr-Heal-Ai/releases)
+
+**Get the latest version for Android devices**
+
+
+
+**🔥Dr.Heal AI** - is an intelligent medical assistant that leverages a sophisticated multi-agent architecture to provide personalized health consultations. Built with LangGraph orchestration, the system coordinates specialized AI agents to analyze symptoms, provide disease information, recommend treatments, and handle medical emergencies.
 
 ---
 
@@ -138,7 +148,8 @@ User Query
 
 ---
 
-## 🚀 Quick Start
+<details>
+<summary><b>🚀 Quick Start</b> (Click to expand)</summary>
 
 ### Prerequisites
 
@@ -203,6 +214,8 @@ flutter pub get
 flutter run
 ```
 
+</details>
+
 ---
 
 ## 📚 Documentation
@@ -220,7 +233,8 @@ Comprehensive documentation is available in the `docs/` folder:
 
 ---
 
-## 🛠️ Technology Stack
+<details>
+<summary><b>🛠️ Technology Stack</b> (Click to expand)</summary>
 
 ### Backend
 - **Framework**: FastAPI 0.115.6
@@ -247,6 +261,7 @@ Comprehensive documentation is available in the `docs/` folder:
 - **Testing**: Pytest (backend), Flutter test (frontend)
 
 ---
+</details>
 
 ## 🎯 Module 2 Compliance (Multi-Agent System)
 
