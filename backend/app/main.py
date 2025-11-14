@@ -9,7 +9,7 @@ from app.api.conversations import router as conversations_router
 from app.api.medical_history import router as medical_history_router
 from app.api.health import router as health_router
 from app.database.connection import get_db_manager
-from app.middleware import RateLimitMiddleware
+from app.middleware import RateLimitMiddleware, SecurityMiddleware
 from app.middleware.performance import PerformanceMiddleware
 
 logger = logging.getLogger(__name__)
@@ -20,6 +20,7 @@ app = FastAPI(
     version="2.0.0"
 )
 
+app.add_middleware(SecurityMiddleware)
 app.add_middleware(PerformanceMiddleware)
 app.add_middleware(RateLimitMiddleware, calls=100, period=60)
 
