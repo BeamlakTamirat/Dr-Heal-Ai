@@ -151,17 +151,25 @@ User Query
 <details>
 <summary><b>🚀 Quick Start</b> (Click to expand)</summary>
 
-### Prerequisites
+### System Requirements
 
-**Backend:**
+**Hardware:**
+- RAM: 4GB minimum, 8GB recommended
+- Storage: 2GB free space
+- Network: Stable internet connection
+
+**Backend Prerequisites:**
 - Python 3.11+
 - PostgreSQL (via Supabase)
 - Google Gemini API key
+- ChromaDB dependencies
+- Git for version control
 
-**Frontend:**
+**Frontend Prerequisites:**
 - Flutter 3.0+
 - Android Studio / Xcode
 - Android/iOS device or emulator
+- Dart SDK 3.0+
 
 ### Installation
 
@@ -314,10 +322,13 @@ Comprehensive documentation is available in the `docs/` folder:
 - ✅ **Error messages**: User-friendly error handling and guidance
 
 **4. Resilience & Monitoring**
-- ✅ **Retry logic**: Exponential backoff for failed API calls
-- ✅ **Timeout handling**: Prevents long-running workflows
+- ✅ **Retry logic**: Exponential backoff for failed API calls (1s, 2s, 4s delays)
+- ✅ **Timeout handling**: 30s LLM, 10s RAG, 15s web search timeouts
+- ✅ **Circuit breaker**: Failure threshold protection for external services
 - ✅ **Graceful degradation**: Fallback responses on agent failure
-- ✅ **Health checks**: `/health` endpoint for monitoring
+- ✅ **Health checks**: `/health` and `/health/detailed` endpoints with component validation
+- ✅ **Performance metrics**: Response time tracking and monitoring
+- ✅ **Security guardrails**: SQL injection, XSS protection, security headers
 - ✅ **Logging**: Structured logging for all failures and retries
 
 **5. Professional Documentation**
