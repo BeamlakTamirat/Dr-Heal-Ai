@@ -7,8 +7,10 @@ from app.api.chat import router as chat_router
 from app.api.auth import router as auth_router
 from app.api.conversations import router as conversations_router
 from app.api.medical_history import router as medical_history_router
+from app.api.health import router as health_router
 from app.database.connection import get_db_manager
 from app.middleware import RateLimitMiddleware
+from app.middleware.performance import PerformanceMiddleware
 
 logger = logging.getLogger(__name__)
 
@@ -18,6 +20,7 @@ app = FastAPI(
     version="2.0.0"
 )
 
+app.add_middleware(PerformanceMiddleware)
 app.add_middleware(RateLimitMiddleware, calls=100, period=60)
 
 app.add_middleware(
@@ -28,11 +31,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(rag_router)
+app.include_router(chat_router)
 app.include_router(auth_router)
 app.include_router(conversations_router)
 app.include_router(medical_history_router)
-app.include_router(rag_router)
-app.include_router(chat_router)
+app.include_router(health_router)
 
 
 @app.on_event("startup")

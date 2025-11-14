@@ -13,31 +13,35 @@ class MedicalWebSearchTool:
         logger.info("Initialized MedicalWebSearchTool")
     
     def search(self, query: str, max_results: int = 3) -> List[Dict[str, Any]]:
-
         try:
-            logger.info(f"Searching web for: '{query}' (max_results={max_results})")
+            from app.utils.resilience import with_timeout
+            import asyncio
             
-            medical_query = f"{query} medical information site:nih.gov OR site:mayoclinic.org OR site:who.int"
+            logger.info(f"Searching web for: '{query}'")
             
-            results = []
-            search_results = self.ddgs.text(medical_query, max_results=max_results)
+            async def _search():
+                with DDGS() as ddgs:
+                    results = list(ddgs.text(query, max_results=max_results))
+                return results
             
-            for result in search_results:
-                results.append({
+            results = asyncio.run(with_timeout(_search(), 15.0))
+            
+            formatted_results = []
+            for result in results:
+                formatted_results.append({
                     'title': result.get('title', ''),
-                    'snippet': result.get('body', ''),
-                    'link': result.get('href', ''),
-                    'source': self._extract_domain(result.get('href', ''))
+                    'body': result.get('body', ''),
+                    'href': result.get('href', ''),
+                    'source': 'web_search'
                 })
             
-            logger.info(f"Found {len(results)} web results")
-            return results
+            logger.info(f"Found {len(formatted_results)} web results")
+            return formatted_results
             
         except Exception as e:
             logger.error(f"Web search failed: {e}")
             return []
     
-    def _extract_domain(self, url: str) -> str:
         try:
             from urllib.parse import urlparse
             parsed = urlparse(url)

@@ -48,19 +48,20 @@ class GeminiLLM:
     
     def generate(self, prompt: str) -> str:
         try:
-            logger.info(f"Generating response for prompt (length: {len(prompt)})")
+            from app.utils.resilience import with_timeout, retry_with_backoff
+            import asyncio
             
-            response = self.llm.invoke(prompt)
+            async def _generate():
+                response = self.llm.invoke(prompt)
+                return response.content
             
-            result = response.content
+            async def _generate_with_timeout():
+                return await with_timeout(_generate(), 30.0)
             
-            logger.info(f"Generated response (length: {len(result)})")
-            
-            return result
-            
+            return asyncio.run(retry_with_backoff(_generate_with_timeout))
         except Exception as e:
-            logger.error(f"Generation failed: {e}")
-            raise
+            logger.error(f"Error generating response: {e}")
+            return "I'm experiencing technical difficulties. Please try again or consult a healthcare provider."
     
     def get_model(self):
         return self.llm
