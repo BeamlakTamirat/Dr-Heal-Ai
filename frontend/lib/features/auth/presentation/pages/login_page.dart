@@ -5,6 +5,7 @@ import '../../../../core/widgets/animated_background.dart';
 import '../../../../core/widgets/glass_card.dart';
 import '../../../../core/widgets/glass_button.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/theme/ethereal_theme.dart';
 import '../providers/auth_provider.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
@@ -30,6 +31,25 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
 
+    // Listen for auth state changes to navigate
+    ref.listen(authProvider, (previous, next) {
+      next.whenOrNull(
+        data: (user) {
+          if (user != null) {
+            context.go('/home');
+          }
+        },
+        error: (error, stack) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(error.toString()),
+              backgroundColor: EtherealTheme.emergencyTriageColor,
+            ),
+          );
+        },
+      );
+    });
+
     return Scaffold(
       body: AnimatedBackground(
         child: SafeArea(
@@ -48,10 +68,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          gradient: AppTheme.primaryGradient,
+                          gradient: EtherealTheme.primaryGradient,
                           boxShadow: [
                             BoxShadow(
-                              color: AppTheme.primary.withValues(alpha: 0.5),
+                              color: EtherealTheme.royalAzure.withValues(alpha: 0.5),
                               blurRadius: 30,
                               spreadRadius: 5,
                             ),
@@ -68,7 +88,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       // Title with gradient
                       ShaderMask(
                         shaderCallback: (bounds) =>
-                            AppTheme.primaryGradient.createShader(bounds),
+                            EtherealTheme.primaryGradient.createShader(bounds),
                         child: Text(
                           'Dr.Heal AI',
                           style: Theme.of(context).textTheme.displayLarge
@@ -79,9 +99,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       Text(
                         'Your AI Health Companion',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white60
-                              : const Color(0xFF64748B),
+                          color: EtherealTheme.slateBlue,
                         ),
                       ),
                       const SizedBox(height: 40),
@@ -90,37 +108,20 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       TextFormField(
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
-                        style: TextStyle(
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white
-                              : const Color(0xFF0F172A),
-                        ),
+                        style: const TextStyle(color: EtherealTheme.midnightNavy),
                         decoration: InputDecoration(
                           labelText: 'Email',
-                          labelStyle: TextStyle(
-                            color:
-                                Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white60
-                                : const Color(0xFF64748B),
-                          ),
+                          labelStyle: const TextStyle(color: EtherealTheme.slateBlue),
                           prefixIcon: Container(
                             margin: const EdgeInsets.all(8),
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color:
-                                  Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? AppTheme.darkGlassBackground
-                                  : AppTheme.lightGlassBackground,
+                              color: EtherealTheme.royalAzure.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.email_outlined,
-                              color:
-                                  Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? Colors.white70
-                                  : const Color(0xFF64748B),
+                              color: EtherealTheme.royalAzure,
                               size: 20,
                             ),
                           ),
@@ -141,37 +142,20 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       TextFormField(
                         controller: _passwordController,
                         obscureText: true,
-                        style: TextStyle(
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white
-                              : const Color(0xFF0F172A),
-                        ),
+                        style: const TextStyle(color: EtherealTheme.midnightNavy),
                         decoration: InputDecoration(
                           labelText: 'Password',
-                          labelStyle: TextStyle(
-                            color:
-                                Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white60
-                                : const Color(0xFF64748B),
-                          ),
+                          labelStyle: const TextStyle(color: EtherealTheme.slateBlue),
                           prefixIcon: Container(
                             margin: const EdgeInsets.all(8),
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color:
-                                  Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? AppTheme.darkGlassBackground
-                                  : AppTheme.lightGlassBackground,
+                              color: EtherealTheme.royalAzure.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.lock_outline,
-                              color:
-                                  Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? Colors.white70
-                                  : const Color(0xFF64748B),
+                              color: EtherealTheme.royalAzure,
                               size: 20,
                             ),
                           ),
@@ -202,13 +186,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         onPressed: () {
                           context.go('/register');
                         },
-                        child: Text(
+                        child: const Text(
                           "Don't have an account? Sign Up",
                           style: TextStyle(
-                            color:
-                                Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white60
-                                : const Color(0xFF64748B),
+                            color: EtherealTheme.slateBlue,
                             fontSize: 14,
                           ),
                         ),
@@ -226,27 +207,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   void _handleLogin() async {
     if (_formKey.currentState!.validate()) {
-      try {
-        await ref
-            .read(authProvider.notifier)
-            .login(
-              email: _emailController.text.trim(),
-              password: _passwordController.text,
-            );
-
-        if (mounted && ref.read(authProvider).isAuthenticated) {
-          context.go('/home');
-        }
-      } catch (e) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(e.toString()),
-              backgroundColor: AppTheme.danger,
-            ),
+      await ref
+          .read(authProvider.notifier)
+          .login(
+            email: _emailController.text.trim(),
+            password: _passwordController.text,
           );
-        }
-      }
     }
   }
 }

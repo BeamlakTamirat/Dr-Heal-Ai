@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../core/widgets/animated_background.dart';
-import '../../../../core/widgets/agent_badge.dart';
-import '../../../../core/widgets/message_bubble.dart';
-import '../../../../core/widgets/chat_input.dart';
+import '../../../../core/theme/ethereal_theme.dart';
+import '../../../../core/widgets/particle_background.dart';
+import '../widgets/neural_message_bubble.dart';
+import '../widgets/neural_chat_input.dart';
 import '../providers/chat_provider.dart';
 
 class ChatPage extends ConsumerStatefulWidget {
@@ -23,8 +22,6 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   @override
   void initState() {
     super.initState();
-
-    // Load existing conversation if ID provided
     if (widget.conversationId != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         ref
@@ -63,12 +60,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Failed to send message: ${e.toString()}'),
-            backgroundColor: AppTheme.danger,
-            action: SnackBarAction(
-              label: 'Retry',
-              textColor: Colors.white,
-              onPressed: () => _handleSendMessage(message),
-            ),
+            backgroundColor: EtherealTheme.emergencyTriageColor,
           ),
         );
       }
@@ -80,128 +72,77 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     final chatState = ref.watch(chatProvider);
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_rounded),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
           onPressed: () => context.pop(),
         ),
-        title: const Text('Dr.Heal AI'),
-        centerTitle: true,
+        title: const Text('NEURAL INTERFACE'),
         actions: [
-          if (chatState.currentConversationId != null)
-            IconButton(
-              icon: const Icon(Icons.more_vert_rounded),
-              onPressed: () {
-                // Show options menu
-              },
-            ),
+          IconButton(
+            icon: const Icon(Icons.more_horiz_rounded),
+            onPressed: () {},
+          ),
         ],
       ),
-      body: AnimatedBackground(
-        child: Column(
-          children: [
-            // Agent Badge (floating)
-            if (chatState.currentAgent != null)
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: AgentBadge(
-                  agentName: chatState.currentAgent,
-                  isActive: chatState.isLoading,
-                  size: 56,
-                ),
-              ),
-
-            // Messages List
-            Expanded(
-              child: chatState.messages.isEmpty
-                  ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.chat_bubble_outline,
-                            size: 80,
-                            color:
-                                Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white24
-                                : Colors.black26,
-                          ),
-                          const SizedBox(height: 24),
-                          Text(
-                            'Start a conversation',
-                            style: Theme.of(context).textTheme.displayMedium
-                                ?.copyWith(
-                                  color:
-                                      Theme.of(context).brightness ==
-                                          Brightness.dark
-                                      ? Colors.white54
-                                      : Colors.black54,
-                                ),
-                          ),
-                          const SizedBox(height: 8),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 48),
-                            child: Text(
-                              'Describe your symptoms and our AI agents will assist you',
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.bodyMedium
-                                  ?.copyWith(
-                                    color:
-                                        Theme.of(context).brightness ==
-                                            Brightness.dark
-                                        ? Colors.white38
-                                        : Colors.black38,
-                                  ),
+      body: ParticleBackground(
+        child: SafeArea(
+          child: Column(
+            children: [
+              // Messages Area
+              Expanded(
+                child: chatState.messages.isEmpty
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(24),
+                              decoration: BoxDecoration(
+                                color: EtherealTheme.royalAzure.withValues(alpha: 0.1),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.auto_awesome_rounded,
+                                size: 48,
+                                color: EtherealTheme.royalAzure,
+                              ),
                             ),
-                          ),
-                        ],
+                            const SizedBox(height: 24),
+                            Text(
+                              'System Online',
+                              style: Theme.of(context).textTheme.displayMedium,
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Describe your symptoms to begin analysis.',
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                          ],
+                        ),
+                      )
+                    : ListView.builder(
+                        controller: _scrollController,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 16,
+                        ),
+                        itemCount: chatState.messages.length,
+                        itemBuilder: (context, index) {
+                          final message = chatState.messages[index];
+                          return NeuralMessageBubble(message: message);
+                        },
                       ),
-                    )
-                  : ListView.builder(
-                      controller: _scrollController,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      itemCount: chatState.messages.length,
-                      itemBuilder: (context, index) {
-                        final message = chatState.messages[index];
-                        return MessageBubble(message: message, showAgent: true);
-                      },
-                    ),
-            ),
-
-            // Error Display
-            if (chatState.error != null)
-              Container(
-                padding: const EdgeInsets.all(16),
-                color: AppTheme.danger.withValues(alpha: 0.1),
-                child: Row(
-                  children: [
-                    const Icon(Icons.error_outline, color: AppTheme.danger),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Text(
-                        chatState.error!,
-                        style: const TextStyle(color: AppTheme.danger),
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        // Retry last message
-                      },
-                      child: const Text('Retry'),
-                    ),
-                  ],
-                ),
               ),
 
-            // Chat Input
-            ChatInput(
-              onSend: _handleSendMessage,
-              isLoading: chatState.isLoading,
-            ),
-          ],
+              // Input Area
+              NeuralChatInput(
+                onSend: _handleSendMessage,
+                isLoading: chatState.isLoading,
+              ),
+            ],
+          ),
         ),
       ),
     );

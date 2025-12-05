@@ -1,57 +1,29 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../core/providers/dio_provider.dart';
 import '../../data/models/user_model.dart';
 import '../../data/services/auth_service.dart';
 
-final authServiceProvider = Provider<AuthService>((ref) {
+part 'auth_provider.g.dart';
+
+@riverpod
+AuthService authService(AuthServiceRef ref) {
   final dioClient = ref.watch(dioClientProvider);
   return AuthService(dioClient);
-});
-
-class AuthState {
-  final UserModel? user;
-  final bool isLoading;
-  final String? error;
-  final bool isAuthenticated;
-
-  const AuthState({
-    this.user,
-    this.isLoading = false,
-    this.error,
-    this.isAuthenticated = false,
-  });
-
-  AuthState copyWith({
-    UserModel? user,
-    bool? isLoading,
-    String? error,
-    bool? isAuthenticated,
-  }) {
-    return AuthState(
-      user: user ?? this.user,
-      isLoading: isLoading ?? this.isLoading,
-      error: error,
-      isAuthenticated: isAuthenticated ?? this.isAuthenticated,
-    );
-  }
 }
 
-class AuthNotifier extends StateNotifier<AuthState> {
-  final AuthService _authService;
-
-  AuthNotifier(this._authService) : super(const AuthState()) {
-    _checkAuthStatus();
+@riverpod
+class Auth extends _$Auth {
+  @override
+  FutureOr<UserModel?> build() async {
+    return _checkAuthStatus();
   }
 
-  Future<void> _checkAuthStatus() async {
+  Future<UserModel?> _checkAuthStatus() async {
     try {
-      final user = await _authService.getProfile();
-      state = state.copyWith(
-        user: user,
-        isAuthenticated: true,
-      );
+      final authService = ref.read(authServiceProvider);
+      return await authService.getProfile();
     } catch (e) {
-      state = state.copyWith(isAuthenticated: false);
+      return null;
     }
   }
 
@@ -59,27 +31,15 @@ class AuthNotifier extends StateNotifier<AuthState> {
     required String email,
     required String password,
   }) async {
-    state = state.copyWith(isLoading: true, error: null);
-
-    try {
-      final response = await _authService.login(
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() async {
+      final authService = ref.read(authServiceProvider);
+      final response = await authService.login(
         email: email,
         password: password,
       );
-
-      state = state.copyWith(
-        user: response.user,
-        isAuthenticated: true,
-        isLoading: false,
-      );
-    } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        error: e.toString(),
-        isAuthenticated: false,
-      );
-      rethrow;
-    }
+      return response.user;
+    });
   }
 
   Future<void> register({
@@ -87,37 +47,24 @@ class AuthNotifier extends StateNotifier<AuthState> {
     required String password,
     String? name,
   }) async {
-    state = state.copyWith(isLoading: true, error: null);
-
-    try {
-      final response = await _authService.register(
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() async {
+      final authService = ref.read(authServiceProvider);
+      final response = await authService.register(
         email: email,
         password: password,
         name: name,
       );
-
-      state = state.copyWith(
-        user: response.user,
-        isAuthenticated: true,
-        isLoading: false,
-      );
-    } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        error: e.toString(),
-        isAuthenticated: false,
-      );
-      rethrow;
-    }
+      return response.user;
+    });
   }
 
   Future<void> logout() async {
-    await _authService.logout();
-    state = const AuthState();
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() async {
+      final authService = ref.read(authServiceProvider);
+      await authService.logout();
+      return null;
+    });
   }
 }
-
-final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
-  final authService = ref.watch(authServiceProvider);
-  return AuthNotifier(authService);
-});

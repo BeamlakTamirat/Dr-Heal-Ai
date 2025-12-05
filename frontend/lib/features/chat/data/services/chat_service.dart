@@ -14,6 +14,10 @@ class ChatService {
     String? conversationId,
   }) async {
     try {
+      print('🔵 [CHAT] Sending message to: ${ApiConstants.chat}');
+      print('🔵 [CHAT] Query: $query');
+      print('🔵 [CHAT] ConversationId: $conversationId');
+      
       final response = await _dioClient.dio.post(
         ApiConstants.chat,
         data: {
@@ -22,8 +26,12 @@ class ChatService {
         },
       );
 
+      print('🟢 [CHAT] Response: ${response.data}');
       return ChatResponse.fromJson(response.data);
     } on DioException catch (e) {
+      print('🔴 [CHAT] DioException: ${e.type}');
+      print('🔴 [CHAT] Response data: ${e.response?.data}');
+      print('🔴 [CHAT] Status code: ${e.response?.statusCode}');
       throw _handleError(e);
     }
   }

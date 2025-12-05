@@ -89,25 +89,21 @@ class MedicalVectorStore:
         n_results: int = 5,
         filter_metadata: Optional[Dict] = None
     ) -> Dict:
+        """Search vector store - synchronous version."""
         try:
-            from app.utils.resilience import with_timeout
-            import asyncio
-            
             logger.info(f"Searching for: '{query}' (n_results={n_results})")
             
-            async def _search():
-                query_embedding = self.embedding_model.encode(query)
-                query_embedding_list = query_embedding.tolist()
-                
-                results = self.collection.query(
-                    query_embeddings=[query_embedding_list],
-                    n_results=n_results,
-                    where=filter_metadata,
-                    include=["documents", "metadatas", "distances"]
-                )
-                return results
+            # Embedding and ChromaDB query are synchronous operations
+            query_embedding = self.embedding_model.encode(query)
+            query_embedding_list = query_embedding.tolist()
             
-            results = asyncio.run(with_timeout(_search(), 10.0))
+            results = self.collection.query(
+                query_embeddings=[query_embedding_list],
+                n_results=n_results,
+                where=filter_metadata,
+                include=["documents", "metadatas", "distances"]
+            )
+            
             logger.info(f"Found {len(results['documents'][0])} results")
             return results
             

@@ -47,18 +47,11 @@ class GeminiLLM:
             raise
     
     def generate(self, prompt: str) -> str:
+        """Generate response using Gemini - synchronous version."""
         try:
-            from app.utils.resilience import with_timeout, retry_with_backoff
-            import asyncio
-            
-            async def _generate():
-                response = self.llm.invoke(prompt)
-                return response.content
-            
-            async def _generate_with_timeout():
-                return await with_timeout(_generate(), 30.0)
-            
-            return asyncio.run(retry_with_backoff(_generate_with_timeout))
+            # ChatGoogleGenerativeAI.invoke() is synchronous, no need for async
+            response = self.llm.invoke(prompt)
+            return response.content
         except Exception as e:
             logger.error(f"Error generating response: {e}")
             return "I'm experiencing technical difficulties. Please try again or consult a healthcare provider."

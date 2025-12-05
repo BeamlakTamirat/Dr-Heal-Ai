@@ -36,6 +36,25 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
 
+    // Listen for auth state changes to navigate
+    ref.listen(authProvider, (previous, next) {
+      next.whenOrNull(
+        data: (user) {
+          if (user != null) {
+            context.go('/home');
+          }
+        },
+        error: (error, stack) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(error.toString()),
+              backgroundColor: Colors.red,
+            ),
+          );
+        },
+      );
+    });
+
     return Scaffold(
       body: AnimatedBackground(
         child: SafeArea(
@@ -362,26 +381,11 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
 
   void _handleRegister() async {
     if (_formKey.currentState!.validate()) {
-      try {
-        await ref.read(authProvider.notifier).register(
-              email: _emailController.text.trim(),
-              password: _passwordController.text,
-              name: _nameController.text.trim(),
-            );
-
-        if (mounted && ref.read(authProvider).isAuthenticated) {
-          context.go('/home');
-        }
-      } catch (e) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(e.toString()),
-              backgroundColor: AppTheme.danger,
-            ),
+      await ref.read(authProvider.notifier).register(
+            email: _emailController.text.trim(),
+            password: _passwordController.text,
+            name: _nameController.text.trim(),
           );
-        }
-      }
     }
   }
 }

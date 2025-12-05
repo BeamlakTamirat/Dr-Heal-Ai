@@ -1,13 +1,16 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../core/providers/dio_provider.dart';
 import '../../data/models/message_model.dart';
 import '../../data/models/conversation_model.dart';
 import '../../data/services/chat_service.dart';
 
-final chatServiceProvider = Provider<ChatService>((ref) {
+part 'chat_provider.g.dart';
+
+@riverpod
+ChatService chatService(ChatServiceRef ref) {
   final dioClient = ref.watch(dioClientProvider);
   return ChatService(dioClient);
-});
+}
 
 class ChatState {
   final String? currentConversationId;
@@ -41,10 +44,12 @@ class ChatState {
   }
 }
 
-class ChatNotifier extends StateNotifier<ChatState> {
-  final ChatService _chatService;
-
-  ChatNotifier(this._chatService) : super(const ChatState());
+@riverpod
+class Chat extends _$Chat {
+  @override
+  ChatState build() {
+    return const ChatState();
+  }
 
   Future<void> sendMessage(String query) async {
     final userMessage = MessageModel(
@@ -61,7 +66,8 @@ class ChatNotifier extends StateNotifier<ChatState> {
     );
 
     try {
-      final response = await _chatService.sendMessage(
+      final chatService = ref.read(chatServiceProvider);
+      final response = await chatService.sendMessage(
         query: query,
         conversationId: state.currentConversationId,
       );
@@ -80,6 +86,9 @@ class ChatNotifier extends StateNotifier<ChatState> {
         isLoading: false,
         currentAgent: response.agentUsed,
       );
+      
+      // Refresh conversations list
+      ref.invalidate(conversationsProvider);
     } catch (e) {
       state = state.copyWith(
         isLoading: false,
@@ -93,7 +102,8 @@ class ChatNotifier extends StateNotifier<ChatState> {
     state = state.copyWith(isLoading: true, error: null);
 
     try {
-      final conversation = await _chatService.getConversation(conversationId);
+      final chatService = ref.read(chatServiceProvider);
+      final conversation = await chatService.getConversation(conversationId);
 
       state = state.copyWith(
         currentConversationId: conversation.id,
@@ -114,12 +124,8 @@ class ChatNotifier extends StateNotifier<ChatState> {
   }
 }
 
-final chatProvider = StateNotifierProvider<ChatNotifier, ChatState>((ref) {
-  final chatService = ref.watch(chatServiceProvider);
-  return ChatNotifier(chatService);
-});
-
-final conversationsProvider = FutureProvider<List<ConversationModel>>((ref) async {
+@riverpod
+Future<List<ConversationModel>> conversations(ConversationsRef ref) async {
   final chatService = ref.watch(chatServiceProvider);
   return await chatService.getConversations();
-});
+}

@@ -15,7 +15,8 @@ final routerProvider = Provider<GoRouter>((ref) {
     initialLocation: '/',
     debugLogDiagnostics: true,
     redirect: (context, state) {
-      final isAuthenticated = authState.isAuthenticated;
+      // With AsyncValue, check if we have a user value
+      final isAuthenticated = authState.valueOrNull != null;
       final isAuthPage = state.matchedLocation == '/login' || 
                          state.matchedLocation == '/register';
 
