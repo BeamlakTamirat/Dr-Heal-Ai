@@ -3,8 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/ethereal_theme.dart';
 import '../../../../core/widgets/particle_background.dart';
-import '../widgets/neural_message_bubble.dart';
+import '../widgets/enhanced_message_bubble.dart';
 import '../widgets/neural_chat_input.dart';
+import '../widgets/typing_indicator.dart';
 import '../providers/chat_provider.dart';
 
 class ChatPage extends ConsumerStatefulWidget {
@@ -78,7 +79,31 @@ class _ChatPageState extends ConsumerState<ChatPage> {
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
           onPressed: () => context.pop(),
         ),
-        title: const Text('NEURAL INTERFACE'),
+        title: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                gradient: EtherealTheme.primaryGradient,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: EtherealTheme.royalAzure.withValues(alpha: 0.3),
+                    blurRadius: 8,
+                    spreadRadius: 1,
+                  ),
+                ],
+              ),
+              child: const Icon(
+                Icons.medical_services_rounded,
+                color: Colors.white,
+                size: 16,
+              ),
+            ),
+            const SizedBox(width: 12),
+            const Text('Dr. Heal AI'),
+          ],
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.more_horiz_rounded),
@@ -100,43 +125,63 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                             Container(
                               padding: const EdgeInsets.all(24),
                               decoration: BoxDecoration(
-                                color: EtherealTheme.royalAzure.withValues(alpha: 0.1),
+                                gradient: EtherealTheme.primaryGradient,
                                 shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: EtherealTheme.royalAzure.withValues(alpha: 0.3),
+                                    blurRadius: 24,
+                                    spreadRadius: 4,
+                                  ),
+                                ],
                               ),
                               child: const Icon(
-                                Icons.auto_awesome_rounded,
+                                Icons.chat_bubble_outline_rounded,
                                 size: 48,
-                                color: EtherealTheme.royalAzure,
+                                color: Colors.white,
                               ),
                             ),
                             const SizedBox(height: 24),
                             Text(
-                              'System Online',
-                              style: Theme.of(context).textTheme.displayMedium,
+                              'Start a Conversation',
+                              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                color: EtherealTheme.midnightNavy,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             const SizedBox(height: 8),
-                            Text(
-                              'Describe your symptoms to begin analysis.',
-                              style: Theme.of(context).textTheme.bodyMedium,
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 48),
+                              child: Text(
+                                'Ask me anything about your health and I\'ll connect you with the right specialist',
+                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                  color: EtherealTheme.slateBlue,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ],
                         ),
                       )
                     : ListView.builder(
                         controller: _scrollController,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 16,
-                        ),
+                        padding: const EdgeInsets.only(top: 16, bottom: 16),
                         itemCount: chatState.messages.length,
                         itemBuilder: (context, index) {
-                          final message = chatState.messages[index];
-                          return NeuralMessageBubble(message: message);
+                          return EnhancedMessageBubble(
+                            message: chatState.messages[index],
+                          );
                         },
                       ),
               ),
 
-              // Input Area
+              // Typing Indicator (shown when loading)
+              if (chatState.isLoading)
+                TypingIndicator(
+                  agentName: chatState.currentAgent ?? 'Dr. Heal AI',
+                ),
+
+              // Chat Input
               NeuralChatInput(
                 onSend: _handleSendMessage,
                 isLoading: chatState.isLoading,
